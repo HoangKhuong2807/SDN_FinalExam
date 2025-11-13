@@ -9,11 +9,12 @@ import Link from 'next/link'
 import { getBooks } from '@/app/actions/books'
 import BookCard from '@/components/BookCard'
 import BookListClient from '@/components/BookListClient'
+import { type Book } from '@/lib/supabase'
 
 export const dynamic = 'force-dynamic'
 
 async function BookList() {
-  let books
+  let books: Book[]
   let error: string | null = null
 
   try {
