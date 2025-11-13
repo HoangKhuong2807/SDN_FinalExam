@@ -10,18 +10,14 @@
 import { useState, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import { type Book } from '@/lib/supabase'
+import { createBook, updateBook } from '@/app/actions/books'
 
 interface BookFormProps {
   book?: Book | null
-  onSubmit: (data: {
-    title: string
-    author: string
-    tags: string[]
-    cover_url?: string | null
-  }) => Promise<void>
+  bookId?: string
 }
 
-export default function BookForm({ book, onSubmit }: BookFormProps) {
+export default function BookForm({ book, bookId }: BookFormProps) {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -51,12 +47,22 @@ export default function BookForm({ book, onSubmit }: BookFormProps) {
         .map(tag => tag.trim())
         .filter(tag => tag.length > 0)
 
-      await onSubmit({
-        title: formData.title.trim(),
-        author: formData.author.trim(),
-        tags: tagsArray,
-        cover_url: formData.cover_url.trim() || null,
-      })
+      // Call the appropriate server action
+      if (bookId) {
+        await updateBook(bookId, {
+          title: formData.title.trim(),
+          author: formData.author.trim(),
+          tags: tagsArray,
+          cover_url: formData.cover_url.trim() || null,
+        })
+      } else {
+        await createBook({
+          title: formData.title.trim(),
+          author: formData.author.trim(),
+          tags: tagsArray,
+          cover_url: formData.cover_url.trim() || null,
+        })
+      }
 
       // Redirect to home page after successful submission
       router.push('/')

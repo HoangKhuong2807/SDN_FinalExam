@@ -4,7 +4,6 @@
  * Allows users to add a new book to the collection.
  */
 
-import { createBook } from '@/app/actions/books'
 import BookForm from '@/components/BookForm'
 
 export default function CreateBookPage() {
@@ -21,7 +20,7 @@ export default function CreateBookPage() {
         </div>
 
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-white/20">
-          <BookForm onSubmit={createBook} />
+          <BookForm />
         </div>
       </div>
     </div>

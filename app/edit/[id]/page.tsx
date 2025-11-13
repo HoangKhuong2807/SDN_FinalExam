@@ -5,7 +5,7 @@
  */
 
 import { notFound } from 'next/navigation'
-import { getBookById, updateBook } from '@/app/actions/books'
+import { getBookById } from '@/app/actions/books'
 import BookForm from '@/components/BookForm'
 
 interface EditBookPageProps {
@@ -34,7 +34,7 @@ export default async function EditBookPage({ params }: EditBookPageProps) {
         </div>
 
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-white/20">
-          <BookForm book={book} onSubmit={(data) => updateBook(params.id, data)} />
+          <BookForm book={book} bookId={params.id} />
         </div>
       </div>
     </div>
