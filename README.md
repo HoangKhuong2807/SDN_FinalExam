@@ -206,4 +206,3 @@ If cover images don't load, check:
 ## License
 
 MIT
-

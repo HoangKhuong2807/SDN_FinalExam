@@ -72,7 +72,7 @@ export async function createBook(book: BookInput): Promise<Book> {
     // Convert tags string to array if needed (handled in form, but just in case)
     const tagsArray = Array.isArray(book.tags) 
       ? book.tags 
-      : book.tags 
+      : typeof book.tags === 'string' && book.tags.trim()
         ? book.tags.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0)
         : []
 
@@ -117,7 +117,7 @@ export async function updateBook(id: string, book: BookInput): Promise<Book> {
     // Convert tags string to array if needed
     const tagsArray = Array.isArray(book.tags) 
       ? book.tags 
-      : book.tags 
+      : typeof book.tags === 'string' && book.tags.trim()
         ? book.tags.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0)
         : []
 

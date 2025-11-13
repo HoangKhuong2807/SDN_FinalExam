@@ -55,7 +55,7 @@ export interface Book {
 export interface BookInput {
   title: string
   author: string
-  tags: string[]
+  tags: string[] | string | null | undefined
   cover_url?: string | null
 }
 
